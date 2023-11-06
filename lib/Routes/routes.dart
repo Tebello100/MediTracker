@@ -49,11 +49,11 @@ class RouteManager {
     switch (settings.name) {
       case home:
         return MaterialPageRoute(
-            builder: (context) => Home(
-                  auth: _auth,
-                  firestore: _firestore,
-                ) //Home(auth: null, firestore: null,),
-            );
+          builder: (context) => Home(
+            auth: _auth,
+            firestore: _firestore,
+          ),
+        );
       case secondPage:
         return MaterialPageRoute(
           builder: (context) => Options(
@@ -70,11 +70,17 @@ class RouteManager {
         );
       case doctorPage:
         return MaterialPageRoute(
-          builder: (context) => const DoctorProfile(),
+          builder: (context) => DoctorProfile(
+            auth: _auth,
+            firestore: _firestore,
+          ),
         );
       case pharmacistPage:
         return MaterialPageRoute(
-          builder: (context) => const PharmacistProfile(),
+          builder: (context) => PharmacistProfile(
+            auth: _auth,
+            firestore: _firestore,
+          ),
         );
       case patientProfile:
         return MaterialPageRoute(
@@ -128,10 +134,10 @@ class RouteManager {
         return MaterialPageRoute(
           builder: (context) => const ResetPassword(),
         );
-      // case setAlarm:
-      //   return MaterialPageRoute(
-      //     builder: (context) => const SetAlarm(),
-      //   );
+      case setAlarm:
+        return MaterialPageRoute(
+          builder: (context) => SetAlarm(),
+        );
       case searchPatient:
         return MaterialPageRoute(
           builder: (context) => const SearchPatient(),

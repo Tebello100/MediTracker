@@ -1,9 +1,21 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:helloworld/Routes/routes.dart';
+import 'package:helloworld/services/auth.dart';
 
-class PharmacistProfile extends StatelessWidget {
-  const PharmacistProfile({Key? key}) : super(key: key);
+class PharmacistProfile extends StatefulWidget {
+  const PharmacistProfile(
+      {Key? key, required this.auth, required this.firestore})
+      : super(key: key);
+  final FirebaseAuth auth;
+  final FirebaseFirestore firestore;
 
+  @override
+  State<PharmacistProfile> createState() => _PharmacistProfileState();
+}
+
+class _PharmacistProfileState extends State<PharmacistProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -117,18 +129,44 @@ class PharmacistProfile extends StatelessWidget {
                       height: 50,
                     ),
                     OutlinedButton(
-                      onPressed: () {
-                        Navigator.of(context).pushNamed(RouteManager.home);
+                      onPressed: () async {
+                        final String? signOutValue =
+                            await Auth(auth: widget.auth).signOut();
+
+                        if (signOutValue == "Successful") {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(signOutValue!)));
+                          Navigator.of(context).pushNamed(RouteManager.home);
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(signOutValue!)));
+                        }
                       },
                       child: const Text(
                         'Log out',
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
                       style: OutlinedButton.styleFrom(
-                        backgroundColor: Colors.redAccent,
-                        shape: const StadiumBorder(),
-                        alignment: Alignment.bottomRight,
+                          backgroundColor: Colors.redAccent,
+                          shape: const StadiumBorder(),
+                          minimumSize: const Size.fromHeight(50)),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    OutlinedButton(
+                      onPressed: () {
+                        Navigator.of(context)
+                            .pushNamed(RouteManager.secondPage);
+                      },
+                      child: const Text(
+                        'Cancel',
+                        style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
+                      style: OutlinedButton.styleFrom(
+                          backgroundColor: Colors.redAccent,
+                          shape: const StadiumBorder(),
+                          minimumSize: const Size.fromHeight(50)),
                     ),
                   ],
                 )

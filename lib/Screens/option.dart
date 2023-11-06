@@ -30,11 +30,18 @@ class _OptionsState extends State<Options> {
                 colors: [Colors.red, Colors.white])),
         child: ListView(
           children: [
-            const Text('Sign in as',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
-                )),
+            const SizedBox(
+              height: 20,
+            ),
+            const Align(
+              alignment: Alignment.center,
+              child: Text('Sign in as',
+                  style: TextStyle(
+                    fontSize: 30,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  )),
+            ),
             CarouselSlider(
                 items: [
                   Column(
@@ -60,7 +67,7 @@ class _OptionsState extends State<Options> {
                               height: 10,
                             ),
                             Align(
-                              alignment: Alignment.bottomLeft,
+                              alignment: Alignment.center,
                               child: OutlinedButton(
                                 onPressed: () {
                                   Navigator.of(context)
@@ -95,7 +102,7 @@ class _OptionsState extends State<Options> {
                               height: 10,
                             ),
                             Align(
-                              alignment: Alignment.bottomLeft,
+                              alignment: Alignment.center,
                               child: OutlinedButton(
                                 onPressed: () {
                                   Navigator.of(context)
@@ -130,7 +137,7 @@ class _OptionsState extends State<Options> {
                               height: 10,
                             ),
                             Align(
-                              alignment: Alignment.bottomLeft,
+                              alignment: Alignment.center,
                               child: OutlinedButton(
                                 onPressed: () {
                                   Navigator.of(context)
